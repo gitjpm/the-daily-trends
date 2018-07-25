@@ -9,7 +9,6 @@ feeds_list:
 edit_feed:
     path: /feeds/edit/{id}
     defaults: { _controller: AppBundle:Feed:edit, id:id }
-    methods: [GET]
 
 delete_feed:
     path: /feeds/delete/{id}

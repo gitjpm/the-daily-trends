@@ -26,6 +26,26 @@ class FeedController extends Controller
     public function editAction(Request $request, $id){
         $feed = $this->getDoctrine()->getRepository('AppBundle:Feed')->find($id);
         $form = $this->createForm(FeedType::class, $feed);
+        $state = '';
+        $form->handleRequest($request);
+        if($form->isSubmitted()){
+            $feed->setTitle($form->get("title")->getData());
+            $feed->setBody($form->get("body")->getData());
+            $feed->setImage($form->get("image")->getData());
+            $feed->setSource($form->get("source")->getData());
+            $feed->setPublisher($form->get("publisher")->getData());
+//            $feed->setCreated(new \DateTime());
+            $feed->setUpdated(new \DateTime());
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($feed);
+            $flushed = $em->flush();
+            if(is_null($flushed)){
+                $state = "Se ha editado la noticia con éxito";
+                return $this->redirectToRoute('feeds_list');
+            }else{
+                $state = "Error al editar la noticia";
+            }
+        }
         return $this->render('@App/Feed/form.html.twig', array(
             'form' => $form->createView(),
             'title' => 'Formulario del Feed'

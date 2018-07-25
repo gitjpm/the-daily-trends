@@ -1,3 +1,12 @@
+The Daily Trends
+================
+
+* Acceso aplicación: http://localhost/the-daily-trends/web/app_dev.php/feeds/index
+* Crear BD the_daily_trends
+* Ejecutar doctrine para generar la entidad Feed:
+bin/console doctrine:schema:update
+
+
 Symfony Standard Edition
 ========================
 
