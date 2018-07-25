@@ -1,0 +1,3 @@
+insert_test:
+    path: /feeds/insert-test
+    defaults: { _controller: AppBundle:Feed:insertTest }
