@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Feed;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Form;
 use AppBundle\Form\FeedType;
@@ -93,5 +94,57 @@ class FeedController extends Controller
         }
 
         die();
+    }
+
+    public function importAction(){
+
+        $arrayRss = array(
+            'EL PAIS' => 'http://ep00.epimg.net/rss/elpais/portada.xml',
+            'EL MUNDO' =>  'http://estaticos.elmundo.es/elmundo/rss/portada.xml'
+        );
+        foreach($arrayRss as $publisher => $rss) {
+            echo $publisher. " - ".$rss;
+            echo "<br>";
+
+            $html = file_get_contents($rss);
+            $crawler = new Crawler($html);
+            $item = $crawler->filter('rss > channel > item')->eq(0);
+            $title = $item->filterXPath('//title')->text();
+
+            switch($publisher){
+                case 'EL PAIS':
+                    $body = $item->filterXPath('//content:encoded')->text();
+                    $image = $item->filterXPath('//enclosure')->attr('url');
+                    break;
+                case 'EL MUNDO':
+                    $body = $item->filterXPath('//media:description')->text();
+                    if(($item->filterXPath('//media:content')->count() == 1)){
+                        $image = $item->filterXPath('//media:content')->attr('url');
+                    }else{
+                        $image = 'N / A';
+                    }
+                    break;
+                default:
+                    $body = '';
+                    break;
+            }
+
+            $source = $item->filterXPath('//dc:creator')->text();
+            $feed = new Feed();
+
+            $feed->setTitle($title);
+            $feed->setBody($body);
+            $feed->setImage($image);
+            $feed->setSource($source);
+            $feed->setPublisher($publisher);
+            $feed->setCreated(new \DateTime());
+            $feed->setUpdated(new \DateTime());
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($feed);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('feeds_list');
+
     }
 }

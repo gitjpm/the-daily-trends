@@ -4,7 +4,7 @@
     <table class="table table-condensed">
         <tr>
             <th>Título</th>
-            <th>Fuelte</th>
+            <th>Fuente</th>
             <th>Publicado en</th>
             <th>Fecha</th>
             <th>Acciones</th>
@@ -18,7 +18,7 @@
             <td>
                 <a class="btn btn-sm btn-outline-warning" href="{{ url('edit_feed', {'id': feed.id}) }}">Ver</a>
                 <a class="btn btn-sm btn-outline-danger" href="{{ url('delete_feed', {'id': feed.id}) }}">Eliminar</a>
-                </td>
+            </td>
         </tr>
     {% endfor %}
     </table>

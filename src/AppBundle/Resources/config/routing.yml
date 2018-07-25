@@ -19,3 +19,7 @@ delete_feed:
 create_feed:
     path: /feeds/create
     defaults: { _controller: AppBundle:Feed:create }
+
+import_news:
+    path: /feeds/import-news
+    defaults: { _controller: AppBundle:Feed:import }
