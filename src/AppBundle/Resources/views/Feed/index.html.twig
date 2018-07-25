@@ -3,10 +3,11 @@
 {% block content %}
     <table class="table table-condensed">
         <tr>
-            <th>Title</th>
-            <th>Source</th>
-            <th>Publisher</th>
-            <th>Created</th>
+            <th>Título</th>
+            <th>Fuelte</th>
+            <th>Publicado en</th>
+            <th>Fecha</th>
+            <th>Acciones</th>
         </tr>
     {% for feed in feeds %}
         <tr>
@@ -14,6 +15,9 @@
             <td>{{ feed.source }}</td>
             <td>{{ feed.publisher }}</td>
             <td>{{ feed.created | date('d/m/Y H:i') }}</td>
+            <td>
+                <a class="btn btn-sm btn-info" href="{{ url('edit_feed', {'id': feed.id}) }}">Ver</a>
+                </td>
         </tr>
     {% endfor %}
     </table>

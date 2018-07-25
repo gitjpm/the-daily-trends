@@ -6,6 +6,8 @@ use AppBundle\Entity\Feed;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\Form;
+use AppBundle\Form\FeedType;
 
 class FeedController extends Controller
 {
@@ -17,6 +19,15 @@ class FeedController extends Controller
         return $this->render('@App/Feed/index.html.twig', array(
             'title' => 'Listado de feeds',
             'feeds' => $feeds
+        ));
+    }
+
+    public function editAction(Request $request, $id){
+        $feed = $this->getDoctrine()->getRepository('AppBundle:Feed')->find($id);
+        $form = $this->createForm(FeedType::class, $feed);
+        return $this->render('@App/Feed/form.html.twig', array(
+            'form' => $form->createView(),
+            'title' => 'Formulario del Feed'
         ));
     }
 

@@ -5,3 +5,12 @@ insert_test:
 feeds_list:
     path: /feeds/index
     defaults: { _controller: AppBundle:Feed:index }
+
+edit_feed:
+    path: /feeds/edit/{id}
+    defaults: { _controller: AppBundle:Feed:edit, id:id }
+    methods: [GET]
+
+create_feed:
+    path: /feeds/create
+    defaults: { _controller: AppBundle:Feed:edit }
