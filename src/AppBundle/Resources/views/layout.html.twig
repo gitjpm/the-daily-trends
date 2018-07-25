@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>
+            {% block title %}{% endblock %} - The Daily Trends
+        </title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            body{
+                padding:10px;
+                font-size:12px;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h2>The Daily Trends</h2>
+        </header>
+        <section id="content">
+            {% block content %}{% endblock %}
+        </section>
+
+        <footer>
+            <p align="center">@the_daily_trends</p>
+        </footer>
+    </body>
+</html>

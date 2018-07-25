@@ -1,3 +1,7 @@
 insert_test:
     path: /feeds/insert-test
     defaults: { _controller: AppBundle:Feed:insertTest }
+
+feeds_list:
+    path: /feeds/index
+    defaults: { _controller: AppBundle:Feed:index }

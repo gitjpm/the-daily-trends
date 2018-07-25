@@ -9,15 +9,15 @@ use Symfony\Component\HttpFoundation\Request;
 
 class FeedController extends Controller
 {
-    /**
-     * @Route("/", name="homepage")
-     */
     public function indexAction(Request $request)
     {
-        // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-        ]);
+        $em = $this->getDoctrine()->getManager();
+        $feedRepository = $em->getRepository("AppBundle:Feed");
+        $feeds = $feedRepository->findAll();
+        return $this->render('@App/Feed/index.html.twig', array(
+            'title' => 'Listado de feeds',
+            'feeds' => $feeds
+        ));
     }
 
     public function insertTestAction()

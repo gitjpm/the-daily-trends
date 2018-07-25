@@ -1,0 +1,20 @@
+{% extends "@App/layout.html.twig" %}
+{%  block title %} {{ title }} {% endblock %}
+{% block content %}
+    <table class="table table-condensed">
+        <tr>
+            <th>Title</th>
+            <th>Source</th>
+            <th>Publisher</th>
+            <th>Created</th>
+        </tr>
+    {% for feed in feeds %}
+        <tr>
+            <td>{{ feed.title }}</td>
+            <td>{{ feed.source }}</td>
+            <td>{{ feed.publisher }}</td>
+            <td>{{ feed.created | date('d/m/Y H:i') }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}
