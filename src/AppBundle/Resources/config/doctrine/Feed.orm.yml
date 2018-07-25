@@ -1,0 +1,31 @@
+AppBundle\Entity\Feed:
+    type: entity
+    table: feeds
+    repositoryClass: AppBundle\Repository\FeedRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        title:
+            type: string
+            length: 255
+        body:
+            type: text
+        image:
+            type: string
+            length: 255
+            nullable: true
+        source:
+            type: string
+            length: 255
+        publisher:
+            type: string
+            length: 255
+        created:
+            type: datetime
+        updated:
+            type: datetime
+    lifecycleCallbacks: {  }
