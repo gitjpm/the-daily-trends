@@ -31,11 +31,20 @@ class FeedController extends Controller
         ));
     }
 
+    public function deleteAction(Request $request, $id){
+        $feed = $this->getDoctrine()->getRepository('AppBundle:Feed')->find($id);
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($feed);
+        $em->flush();
+
+        return $this->redirectToRoute('feeds_list');
+    }
+
     public function createAction(Request $request){
         $feed = new Feed();
         $form = $this->createForm(FeedType::class, $feed);
         $form->handleRequest($request);
-
+        $state = '';
         if($form->isSubmitted()){
             $feed = new Feed();
             $feed->setTitle($form->get("title")->getData());
@@ -50,6 +59,7 @@ class FeedController extends Controller
             $flushed = $em->flush();
             if(is_null($flushed)){
                 $state = "Se ha insertado la noticia con éxito";
+                return $this->redirectToRoute('feeds_list');
             }else{
                 $state = "Error al añadir la noticia";
             }

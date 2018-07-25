@@ -11,6 +11,11 @@ edit_feed:
     defaults: { _controller: AppBundle:Feed:edit, id:id }
     methods: [GET]
 
+delete_feed:
+    path: /feeds/delete/{id}
+    defaults: { _controller: AppBundle:Feed:delete, id:id }
+    methods: [GET]
+
 create_feed:
     path: /feeds/create
     defaults: { _controller: AppBundle:Feed:create }

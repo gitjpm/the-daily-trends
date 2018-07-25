@@ -17,6 +17,7 @@
             <td>{{ feed.created | date('d/m/Y H:i') }}</td>
             <td>
                 <a class="btn btn-sm btn-outline-warning" href="{{ url('edit_feed', {'id': feed.id}) }}">Ver</a>
+                <a class="btn btn-sm btn-outline-danger" href="{{ url('delete_feed', {'id': feed.id}) }}">Eliminar</a>
                 </td>
         </tr>
     {% endfor %}
