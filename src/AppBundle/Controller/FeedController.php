@@ -31,6 +31,36 @@ class FeedController extends Controller
         ));
     }
 
+    public function createAction(Request $request){
+        $feed = new Feed();
+        $form = $this->createForm(FeedType::class, $feed);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted()){
+            $feed = new Feed();
+            $feed->setTitle($form->get("title")->getData());
+            $feed->setBody($form->get("body")->getData());
+            $feed->setImage($form->get("image")->getData());
+            $feed->setSource($form->get("source")->getData());
+            $feed->setPublisher($form->get("publisher")->getData());
+            $feed->setCreated(new \DateTime());
+            $feed->setUpdated(new \DateTime());
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($feed);
+            $flushed = $em->flush();
+            if(is_null($flushed)){
+                $state = "Se ha insertado la noticia con éxito";
+            }else{
+                $state = "Error al añadir la noticia";
+            }
+        }
+        return $this->render('@App/Feed/form.html.twig', array(
+            'form' => $form->createView(),
+            'title' => 'Creación de noticia',
+            'state' => $state,
+        ));
+    }
+
     public function insertTestAction()
     {
         $feed = new Feed();

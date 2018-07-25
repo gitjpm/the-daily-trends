@@ -13,4 +13,4 @@ edit_feed:
 
 create_feed:
     path: /feeds/create
-    defaults: { _controller: AppBundle:Feed:edit }
+    defaults: { _controller: AppBundle:Feed:create }

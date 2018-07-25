@@ -17,12 +17,12 @@ class FeedType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class, array("required" => "required"))
-            ->add('body', TextareaType::class)
-            ->add('image', TextType::class)
-            ->add('source', TextType::class)
-            ->add('publisher', TextType::class)
-            ->add('Guardar', SubmitType::class);
+            ->add('title', TextType::class, array("required" => "required", "attr" => array("class" => "form-control")))
+            ->add('body', TextareaType::class, array("required" => "required", "attr" => array("class" => "form-control")))
+            ->add('image', TextType::class, array("required" => "required", "attr" => array("class" => "form-control")))
+            ->add('source', TextType::class, array("required" => "required", "attr" => array("class" => "form-control")))
+            ->add('publisher', TextType::class, array("required" => "required", "attr" => array("class" => "form-control")))
+            ->add('Guardar', SubmitType::class, array("attr" => array("class" => "btn btn-md btn-outline-success")));
     }
     
     /**
